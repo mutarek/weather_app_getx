@@ -9,7 +9,6 @@ class MainController extends GetxController {
     await getUserLocation();
     currentWeatherData = ApiClient().getCurrentWeather(latitude.value, longitude.value);
     hourlyWeatherData = ApiClient().getHourlyWeather(latitude.value, longitude.value);
-
     super.onInit();
   }
 
@@ -18,8 +17,13 @@ class MainController extends GetxController {
   dynamic hourlyWeatherData;
   var latitude = 0.0.obs;
   var longitude = 0.0.obs;
-
   var isloaded = false.obs;
+  var isBangla = false.obs;
+
+  changeLanguage(){
+    isBangla.value =! isBangla.value;
+    Get.updateLocale(isBangla.value?Locale('bn,','BD'):Locale('en,','US'));
+  }
 
   changeTheme() {
     isDark.value = !isDark.value;
